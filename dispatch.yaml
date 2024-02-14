@@ -1,0 +1,13 @@
+- name: dispatch
+  hosts: dispatch
+  become: yes
+  tasks: 
+  - name: install golang
+    ansible.builtin.dnf:
+      name: golang
+      state: present
+  
+  - name: add user
+    ansible.builtin.user:
+      name: roboshop
+      
