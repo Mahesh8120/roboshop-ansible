@@ -12,21 +12,21 @@
       name: mongodb-org
       state: present    
 
-  - name: start and enable mongod service
+  - name: start and enable mongodb service
     ansible.builtin.service:
-      name: mongod     
+      name: mongodb     
       state: started
       enabled: yes
 
   - name: replace the content
     ansible.builtin.service:
-      path: etc/mongod.con
+      path: etc/mongodb.con
       regexp: 127.0.0.1
       replace: 0.0.0.0
 
-  - name: restart mongod
+  - name: restart mongodb
     ansible.builtin.service: 
-      name: mongod
+      name: mongodb
       state: restarted 
 
  
