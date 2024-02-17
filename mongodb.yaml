@@ -19,7 +19,7 @@
       enabled: yes
 
   - name: replace the content
-    ansible.biiltin.service:
+    ansible.builtin.service:
       path: etc/mongod.con
       regexp: 127.0.0.1
       replace: 0.0.0.0
