@@ -7,7 +7,47 @@
       name: golang
       state: present
   
-  - name: add user
+  - name: useradd roboshop
     ansible.builtin.user:
       name: roboshop
-      
+  
+  - name: crate a app directory
+    ansible.builtin.file: 
+      name: /app
+      state: directory
+
+  - name: download application code
+    ansible.builtin.get_url: 
+      url: https://roboshop-builds.s3.amazonaws.com/dispatch.zip
+      dest: /tmp
+
+- name: extract dispatch service
+  ansible.builtin.unarchive:
+    src: /tmp/dispatch.zip
+    dest: /app
+    remote src: yes
+
+- name: install dependencies
+  ansible.builtin.command:
+  loop: 
+    - go mod init dispatch
+    - go get 
+    - go build
+  args: 
+    chidr: /app
+
+- name: copy dispatch services
+  ansible.builtin.copy: 
+    src: dispatch.service
+    dest: /etc/systemd/system/dispatch.service  
+
+- name: load the services
+  ansible.builtin.service:
+    daemon_reload: true
+
+- name: start and enable dispatch
+  ansible.builtin.service:
+    name: dispatch
+    state: restarted
+    enabled: yes 
+    
