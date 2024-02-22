@@ -4,14 +4,10 @@
   tasks: 
   - name: installing remirepo
     ansible.builtin.dnf:
-      name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+      name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm ;dnf module enable redis:remi-6.2 -y
       state: present
       # disable_gpg_check: true
-  - name: install remi
-    ansible.builtin.dnf:
-      name: remi-6.2 
-      state: present
-
+  
   - name: inastall redis
     ansible.builtin.dnf:
       name: redis
