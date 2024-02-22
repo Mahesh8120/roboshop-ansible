@@ -1,12 +1,11 @@
-- name: redis
+- name: setting up redis
   hosts: redis
   become: yes
   tasks: 
   - name: installing remirepo
-    ansible.builtin.shell: dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
-  
-  - name: enable remi module
-    ansible.builtin.command: dnf module enable redis:remi-6.2 -y
+    ansible.builtin.shell: dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y ; dnf module enable redis:remi-6.2 -y
+    #diable_gpg_check: true
+
     
   - name: inastall redis
     ansible.builtin.dnf:
