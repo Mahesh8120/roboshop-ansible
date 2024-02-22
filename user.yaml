@@ -3,7 +3,7 @@
   become: yes
   tasks:
   - name: disable old version and enable new version
-    ansible.builtin.: dnf module disable nodejs -y ; dnf module enable nodejs:18 -y
+    ansible.builtin.shell: dnf module disable nodejs -y ; dnf module enable nodejs:18 -y
   
   - name: install nodejs
     ansible.builtin.dnf: 
@@ -55,7 +55,7 @@
       state: present
   
   # - name: get the users count
-  #   ansible.builtin.command:  mongo --host mongodb.daws76s.online --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
+  #   ansible.builtin.command:  mongo --host mongodb.pjdevops.online --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
   #   register: user_count
 
   - name: load user data
