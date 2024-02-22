@@ -28,13 +28,7 @@
       remote_src: yes
 
   - name: install dependencies
-    ansible.builtin.dnf:
-      name: "{{item}}" 
-      state: present
-    loop:
-    - go mod init dispatch
-    - go get 
-    - go build
+    ansible.builtin.command: go mod init dispatch ; go get ; go build 
     args: 
       chidr: /app
 
