@@ -21,35 +21,35 @@
       url: https://roboshop-builds.s3.amazonaws.com/dispatch.zip
       dest: /tmp
 
-- name: extract dispatch service
-  ansible.builtin.unarchive:
-    src: /tmp/dispatch.zip
-    dest: /app
-    remote src: yes
+  - name: extract dispatch service
+    ansible.builtin.unarchive:
+      src: /tmp/dispatch.zip
+      dest: /app
+      remote_src: yes
 
-- name: install dependencies
-  ansible.builtin.dnf:
-    name: "{{item}}" 
-    state: present
-  loop:
-  - go mod init dispatch
-  - go get 
-  - go build
-  args: 
-    chidr: /app
+  - name: install dependencies
+    ansible.builtin.dnf:
+      name: "{{item}}" 
+      state: present
+    loop:
+      - go mod init dispatch
+      - go get 
+      - go build
+    args: 
+      chidr: /app
 
-- name: copy dispatch services
-  ansible.builtin.copy: 
-    src: dispatch.service
-    dest: /etc/systemd/system/dispatch.service  
+  - name: copy dispatch services
+    ansible.builtin.copy: 
+      src: dispatch.service
+      dest: /etc/systemd/system/dispatch.service  
 
-- name: load the services
-  ansible.builtin.service:
-    daemon_reload: true
+  - name: load the services
+    ansible.builtin.service:
+      daemon_reload: true
 
-- name: start and enable dispatch
-  ansible.builtin.service:
-    name: dispatch
-    state: restarted
-    enabled: yes 
+  - name: start and enable dispatch
+    ansible.builtin.service:
+      name: dispatch
+      state: restarted
+      enabled: yes 
     
