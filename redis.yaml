@@ -9,7 +9,7 @@
       # disable_gpg_check: true
   
   - name: inastall redis
-    ansible.builtin.package:
+    ansible.builtin.dnf:
       name: redis
       state: present
     
