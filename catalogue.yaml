@@ -61,7 +61,7 @@
 
   - name: get the categories count
     ansible.builtin.command:  mongo --host mongodb.pjdevops.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
-      register: product_count
+    register: product_count
 
   - name: loading schema 
     ansible.builtin.command: mongo --host mongodb.pjdevops.online </app/schema/catalogue.js
