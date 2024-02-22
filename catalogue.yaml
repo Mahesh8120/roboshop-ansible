@@ -1,4 +1,4 @@
-- name: catalogue
+- name: setup catalogue
   hosts: catalogue
   become: yes
   tasks: 
