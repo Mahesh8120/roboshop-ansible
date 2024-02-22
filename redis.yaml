@@ -3,7 +3,7 @@
   become: yes
   tasks: 
   - name: installing remirepo
-    ansible.builtin.dnf: https://rpms.remirepo.net/enterprise/remi-release-8.rpm ; dnf module enable redis:remi-6.2 -y
+    ansible.builtin.shell: https://rpms.remirepo.net/enterprise/remi-release-8.rpm ; dnf module enable redis:remi-6.2 -y
       state: present
       # disable_gpg_check: true
   
