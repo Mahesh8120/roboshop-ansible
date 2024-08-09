@@ -54,9 +54,9 @@
       name: mongodb-org-shell
       state: present
   
-  # - name: get the users count
-  #   ansible.builtin.command:  mongo --host mongodb.pjdevops.online --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
-  #   register: user_count
+  - name: get the users count
+    ansible.builtin.command:  mongo --host mongodb.pjdevops.online --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
+    register: user_count
 
   - name: load user data
     ansible.builtin.command: mongo --host mongodb.pjdevops.online < /app/schema/user.js
